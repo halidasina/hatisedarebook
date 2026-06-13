@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-const { Resend } = require('resend');
+const nodemailer = require('nodemailer');
 
 function generatePassword() {
   const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
@@ -30,14 +30,13 @@ exports.handler = async (event) => {
 
   let data;
   try {
-    // ToyyibPay sends form-encoded POST
     data = parseBody(event.body);
   } catch (e) {
     return { statusCode: 400, headers: corsHeaders, body: 'Bad Request' };
   }
 
   // ToyyibPay callback fields: billcode, order_id, transaction_id, msg, status_id, name, email, phone, amount
-  const { status_id, name, email, amount, billcode } = data;
+  const { status_id, name, email } = data;
 
   // status_id "1" = successful payment
   if (status_id !== '1') {
@@ -66,10 +65,17 @@ exports.handler = async (event) => {
       [name.trim(), email.toLowerCase().trim(), password, true]
     );
 
-    // Send welcome email with credentials
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: 'Hati Sedar <noreply@hatisedar.com>',
+    // Send welcome email via Gmail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+    });
+
+    await transporter.sendMail({
+      from: `"Hati Sedar" <${process.env.GMAIL_USER}>`,
       to: email.trim(),
       subject: '✅ Akses Hati Sedar Anda Telah Diaktifkan',
       html: buildEmailHtml(name.trim(), email.toLowerCase().trim(), password),
