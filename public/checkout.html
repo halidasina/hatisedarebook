@@ -176,7 +176,7 @@
   </div>
 
   <script>
-    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+    document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
       const name = document.getElementById('name').value.trim();
@@ -193,18 +193,28 @@
       }
 
       btn.disabled = true;
-      btn.textContent = 'Mengalihkan...';
+      btn.textContent = 'Menyediakan pembayaran...';
 
-      // Build ToyyibPay URL with buyer info passed as order description
-      // ToyyibPay will POST name+email back in the callback
-      const params = new URLSearchParams({
-        billName: name,
-        billEmail: email,
-        billPhone: '',
-        billTo: name,
-      });
+      try {
+        const res = await fetch('/.netlify/functions/create-bill', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email }),
+        });
 
-      window.location.href = 'https://toyyibpay.com/HATISEDARAPP?' + params.toString();
+        const data = await res.json();
+
+        if (!res.ok || !data.url) {
+          throw new Error(data.error || 'Ralat semasa menyediakan pembayaran.');
+        }
+
+        window.location.href = data.url;
+      } catch (err) {
+        errMsg.textContent = err.message;
+        errMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Teruskan ke Pembayaran →';
+      }
     });
   </script>
 </body>

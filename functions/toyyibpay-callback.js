@@ -35,13 +35,20 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers: corsHeaders, body: 'Bad Request' };
   }
 
-  // ToyyibPay callback fields: billcode, order_id, transaction_id, msg, status_id, name, email, phone, amount
-  const { status_id, name, email } = data;
+  // ToyyibPay callback fields: refno, status, reason, billcode, order_id, amount, transaction_id
+  // order_id contains "name||email" that we set in create-bill
+  const { status, order_id } = data;
 
-  // status_id "1" = successful payment
-  if (status_id !== '1') {
+  // status "1" = successful payment
+  if (status !== '1') {
     return { statusCode: 200, headers: corsHeaders, body: 'Payment not successful, ignored.' };
   }
+
+  if (!order_id || !order_id.includes('||')) {
+    return { statusCode: 400, headers: corsHeaders, body: 'Missing buyer info in order_id' };
+  }
+
+  const [name, email] = order_id.split('||');
 
   if (!email || !name) {
     return { statusCode: 400, headers: corsHeaders, body: 'Missing buyer info' };
