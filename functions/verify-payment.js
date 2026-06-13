@@ -114,11 +114,11 @@ exports.handler = async (event) => {
     });
 
     console.log('Account created and email sent to:', email);
-    return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true, debug: 'Account created and email sent to ' + email }) };
 
   } catch (err) {
     console.error('DB/email error:', err);
-    return { statusCode: 500, headers, body: JSON.stringify({ success: false, error: 'Ralat sistem. Hubungi @hatisedar.' }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ success: false, error: err.message }) };
   } finally {
     await client.end();
   }

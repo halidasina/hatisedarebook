@@ -136,8 +136,10 @@
 
         if (data.success) {
           success.classList.add('show');
+          if (data.debug) console.log('Debug:', data.debug);
         } else {
           showFail('Ralat', data.error || 'Sila hubungi kami di @hatisedar.');
+          document.getElementById('failMsg').textContent = data.error || 'Unknown error';
         }
       } catch (err) {
         showFail('Ralat Sambungan', 'Sila hubungi kami di @hatisedar dengan bukti pembayaran anda.');
