@@ -28,6 +28,9 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers: corsHeaders, body: 'Method Not Allowed' };
   }
 
+  console.log('Callback received! Method:', event.httpMethod);
+  console.log('Callback body:', event.body);
+
   let data;
   try {
     data = parseBody(event.body);

@@ -53,6 +53,8 @@ exports.handler = async (event) => {
     billDisplayMerchant: '1',
   });
 
+  console.log('Creating bill for:', email, '| callbackUrl: https://mymuhasabahjournal.netlify.app/.netlify/functions/toyyibpay-callback');
+
   try {
     const response = await fetch('https://toyyibpay.com/index.php/api/createBill', {
       method: 'POST',
