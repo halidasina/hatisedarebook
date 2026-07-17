@@ -1,599 +1,198 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muhasabah Journal — Hati Sedar</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-<style>
-/* ── RESET & BASE ── */
-*{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --cream:#F5F0E8; --warm:#FDFAF4; --gold:#C4975A; --gold-l:#E8C98A;
-  --sage:#7A8C6E; --sage-l:#B8C4AD; --deep:#2C2416; --mid:#5C4F3A;
-  --muted:#9B8E7A; --blush:#D4A89A; --teal:#5B8A8B;
-}
-html{scroll-behavior:smooth;}
-body{background:var(--cream);color:var(--deep);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebook Hati Sedar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5vw;display:flex;align-items:center;height:68px;transition:all .35s;}
-nav.scrolled{background:rgba(245,240,232,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,151,90,.15);box-shadow:0 2px 20px rgba(44,36,22,.06);}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--deep);}
-.nav-logo-text span{color:var(--gold);}
-.nav-links{display:flex;align-items:center;gap:32px;margin-left:auto;}
-.nav-links a{text-decoration:none;font-size:13px;color:var(--muted);transition:color .2s;font-family:'DM Mono',monospace;letter-spacing:1px;}
-.nav-links a:hover{color:var(--gold);}
-.nav-cta{padding:9px 22px;background:var(--gold);color:var(--deep)!important;border-radius:100px;font-weight:600!important;font-family:'Plus Jakarta Sans',sans-serif!important;letter-spacing:0!important;font-size:13px!important;transition:all .2s!important;}
-.nav-cta:hover{background:var(--gold-l)!important;transform:translateY(-1px);}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:auto;}
-.nav-hamburger span{width:24px;height:2px;background:var(--deep);border-radius:2px;transition:all .3s;}
-.mobile-menu{display:none;position:fixed;inset:0;background:var(--warm);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--deep);text-decoration:none;}
-.mobile-menu .m-cta{padding:14px 40px;background:var(--gold);color:var(--deep);border-radius:100px;font-size:16px;font-weight:700;}
+        body {
+            font-family: 'Georgia', 'Garamond', serif;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.8;
+        }
 
-/* ── HERO ── */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 5vw 60px;position:relative;overflow:hidden;background:var(--cream);}
-.hero-dots{position:absolute;inset:0;pointer-events:none;}
-.hero-dots::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,151,90,.12) 1px,transparent 1px);background-size:32px 32px;}
-.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(196,151,90,.08) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none;}
-.hero-glow-2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(122,140,110,.07) 0%,transparent 70%);bottom:-80px;left:-80px;pointer-events:none;}
-.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1100px;width:100%;}
-.hero-left{position:relative;z-index:1;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(196,151,90,.1);border:1px solid rgba(196,151,90,.25);border-radius:100px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:24px;animation:fadeUp .7s .1s both;}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,5vw,68px);font-weight:300;line-height:1.1;margin-bottom:20px;animation:fadeUp .7s .2s both;}
-.hero-title em{font-style:italic;color:var(--gold);}
-.hero-subtitle{font-size:16px;color:var(--mid);line-height:1.8;max-width:440px;margin-bottom:36px;animation:fadeUp .7s .3s both;}
-.hero-subtitle strong{color:var(--deep);}
-.hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;animation:fadeUp .7s .4s both;}
-.btn-primary{padding:14px 36px;background:var(--gold);color:var(--deep);border:none;border-radius:100px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;text-decoration:none;display:inline-block;}
-.btn-primary:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 10px 30px rgba(196,151,90,.3);}
-.btn-secondary{padding:14px 28px;background:transparent;color:var(--mid);border:1px solid rgba(196,151,90,.3);border-radius:100px;font-size:14px;cursor:pointer;font-family:inherit;transition:all .2s;text-decoration:none;display:inline-block;}
-.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
-.hero-proof{display:flex;align-items:center;gap:10px;margin-top:24px;animation:fadeUp .7s .5s both;}
-.hero-proof-dots{display:flex;}
-.hero-proof-dots span{width:28px;height:28px;border-radius:50%;background:var(--sage-l);border:2px solid var(--warm);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--sage);font-weight:700;}
-.hero-proof p{font-size:12px;color:var(--muted);}
-.hero-proof p strong{color:var(--mid);}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
 
-/* HERO VISUAL */
-.hero-right{position:relative;z-index:1;animation:fadeUp .7s .3s both;}
-.phone-mockup{width:280px;margin:0 auto;position:relative;}
-.phone-frame{background:var(--deep);border-radius:36px;padding:3px;box-shadow:0 30px 80px rgba(44,36,22,.25),0 0 0 1px rgba(196,151,90,.2);}
-.phone-screen{background:var(--deep);border-radius:34px;overflow:hidden;aspect-ratio:9/19;}
-.phone-screen-inner{height:100%;display:flex;flex-direction:column;}
-.ps-nav{background:#1A1408;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(196,151,90,.15);}
-.ps-nav-brand{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gold);font-style:italic;}
-.ps-body{flex:1;padding:16px 14px;overflow:hidden;}
-.ps-hero-card{background:#1A1408;border-radius:14px;padding:16px;margin-bottom:10px;position:relative;overflow:hidden;}
-.ps-hero-card::after{content:'✦';position:absolute;font-size:80px;color:var(--gold);opacity:.04;right:-10px;top:-10px;line-height:1;}
-.ps-greeting{font-family:'Cormorant Garamond',serif;font-size:16px;color:white;font-weight:300;margin-bottom:4px;}
-.ps-greeting em{font-style:italic;color:var(--gold-l);}
-.ps-sub{font-size:9px;color:var(--sage-l);margin-bottom:12px;}
-.ps-streak{display:flex;gap:4px;margin-bottom:12px;}
-.ps-day{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;}
-.ps-day.done{background:var(--gold);color:var(--deep);}
-.ps-day.miss{background:rgba(255,255,255,.07);color:rgba(255,255,255,.2);}
-.ps-btn{background:var(--gold);border:none;border-radius:100px;padding:7px 14px;font-size:9px;font-weight:700;color:var(--deep);cursor:default;font-family:inherit;}
-.ps-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
-.ps-stat{background:rgba(253,250,244,.04);border-radius:10px;padding:8px 6px;text-align:center;border:1px solid rgba(196,151,90,.08);}
-.ps-stat-n{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);line-height:1;}
-.ps-stat-l{font-size:7px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;}
-.ps-card{background:rgba(253,250,244,.04);border-radius:10px;padding:10px;border-left:2px solid var(--gold);}
-.ps-card-tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;}
-.ps-card-text{font-size:9px;color:rgba(255,255,255,.7);line-height:1.5;}
-.phone-float-1{position:absolute;top:-20px;right:-30px;background:var(--warm);border-radius:14px;padding:10px 14px;box-shadow:0 8px 24px rgba(44,36,22,.12);font-size:11px;color:var(--mid);white-space:nowrap;animation:float 3s ease-in-out infinite;}
-.phone-float-1 strong{color:var(--sage);display:block;font-size:13px;}
-.phone-float-2{position:absolute;bottom:-10px;left:-40px;background:var(--deep);border-radius:14px;padding:10px 14px;box-shadow:0 8px 24px rgba(44,36,22,.2);font-size:11px;color:var(--sage-l);white-space:nowrap;animation:float 3s ease-in-out .8s infinite;}
-.phone-float-2 strong{color:var(--gold);display:block;font-size:12px;}
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            border-bottom: 2px solid #e5e5e5;
+            padding-bottom: 40px;
+        }
 
-/* ── SECTION COMMON ── */
-section{padding:96px 5vw;}
-.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;display:block;}
-.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;line-height:1.2;margin-bottom:16px;}
-.section-title em{font-style:italic;color:var(--gold);}
-.section-sub{font-size:15px;color:var(--muted);max-width:520px;line-height:1.8;}
-.section-header{text-align:center;margin-bottom:64px;}
-.section-header .section-sub{margin:0 auto;}
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
 
-/* ── FEATURES ── */
-.features{background:var(--warm);}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto;}
-.feat-card{background:var(--cream);border-radius:24px;padding:32px 28px;border:1px solid rgba(196,151,90,.1);transition:all .3s;position:relative;overflow:hidden;}
-.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--sage));opacity:0;transition:opacity .3s;}
-.feat-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(44,36,22,.08);border-color:rgba(196,151,90,.25);}
-.feat-card:hover::before{opacity:1;}
-.feat-icon{width:48px;height:48px;border-radius:14px;background:rgba(196,151,90,.1);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px;}
-.feat-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:10px;}
-.feat-desc{font-size:13px;color:var(--muted);line-height:1.7;}
-.feat-tag{display:inline-block;margin-top:16px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--sage);background:rgba(122,140,110,.1);padding:4px 12px;border-radius:100px;}
-.feat-card.featured{background:var(--deep);grid-column:span 1;}
-.feat-card.featured .feat-title{color:white;}
-.feat-card.featured .feat-desc{color:var(--sage-l);}
-.feat-card.featured .feat-tag{color:var(--gold);background:rgba(196,151,90,.15);}
-.feat-card.featured .feat-icon{background:rgba(196,151,90,.15);}
+        .header p {
+            font-size: 1.1em;
+            color: #666;
+            font-style: italic;
+            line-height: 1.6;
+        }
 
-/* ── PRICING ── */
-.pricing{background:var(--cream);}
-.pricing-inner{max-width:960px;margin:0 auto;}
-.pricing-card{background:var(--warm);border-radius:28px;padding:56px 48px;border:1px solid rgba(196,151,90,.15);display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;overflow:hidden;}
-.pricing-card::after{content:'✦';position:absolute;font-size:300px;color:var(--gold);opacity:.03;right:-60px;bottom:-80px;line-height:1;pointer-events:none;}
-.pricing-left .price-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold);margin-bottom:16px;}
-.price-amount{font-family:'Cormorant Garamond',serif;font-size:72px;color:var(--deep);line-height:1;margin-bottom:8px;}
-.price-amount span{font-size:24px;vertical-align:top;margin-top:12px;display:inline-block;margin-right:4px;}
-.price-note{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.price-cta{display:inline-block;width:100%;padding:18px;background:var(--gold);color:var(--deep);text-decoration:none;text-align:center;border-radius:100px;font-weight:700;font-size:16px;transition:all .25s;margin-bottom:16px;}
-.price-cta:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 12px 30px rgba(196,151,90,.25);}
-.price-sub{font-size:11px;color:var(--muted);text-align:center;}
+        .intro {
+            margin-bottom: 60px;
+            font-size: 1.05em;
+            line-height: 1.9;
+        }
 
-.pricing-right{border-left:1px solid rgba(196,151,90,.15);padding-left:60px;}
-.includes-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:24px;}
-.include-item{display:flex;gap:16px;margin-bottom:20px;}
-.include-check{width:20px;height:20px;border-radius:50%;background:rgba(122,140,110,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
-.include-check svg{width:12px;height:12px;}
-.include-text{font-size:13px;color:var(--mid);line-height:1.5;}
-.include-text strong{display:block;color:var(--deep);margin-bottom:2px;}
+        .intro strong {
+            color: #1b5e20;
+        }
 
-/* ── FAQ ── */
-.faq{background:var(--warm);}
-.faq-inner{max-width:720px;margin:0 auto;}
-.faq-item{border-bottom:1px solid rgba(196,151,90,.15);padding:8px 0;}
-.faq-q{padding:24px 0;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .2s;}
-.faq-q:hover .faq-q-text{color:var(--gold);}
-.faq-q-text{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--deep);transition:color .2s;}
-.faq-icon{font-size:18px;color:var(--muted);transition:transform .3s;}
-.faq-a{max-height:0;overflow:hidden;transition:all .35s ease-out;color:var(--mid);font-size:14px;line-height:1.8;}
-.faq-a-inner{padding:0 0 24px;}
-.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--gold);}
-.faq-item.open .faq-a{max-height:200px;}
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin: 60px 0 40px 0;
+            color: #1b5e20;
+            letter-spacing: 0.5px;
+        }
 
-/* ── CTA BOTTOM ── */
-.cta-bottom{background:var(--deep);color:white;text-align:center;position:relative;overflow:hidden;padding:120px 5vw;}
-.cta-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(196,151,90,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
-.cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
-.cta-bottom .section-title{color:white;}
-.cta-bottom .section-sub{color:var(--sage-l);margin:0 auto 40px;}
-.cta-quote{margin-top:48px;font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(255,255,255,.4);font-size:18px;}
-.cta-quote cite{display:block;font-style:normal;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;margin-top:12px;color:var(--gold);text-transform:uppercase;}
+        .ebook-card {
+            background: #f9f9f9;
+            border-left: 4px solid #1b5e20;
+            padding: 35px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
 
-/* ── FOOTER ── */
-footer{padding:64px 5vw;background:var(--cream);border-top:1px solid rgba(196,151,90,.1);text-align:center;}
-.footer-brand{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;color:var(--deep);margin-bottom:24px;}
-.footer-links{display:flex;justify-content:center;gap:32px;margin-bottom:32px;}
-.footer-links a{text-decoration:none;color:var(--muted);font-size:12px;font-family:'DM Mono',monospace;letter-spacing:1px;transition:color .2s;}
-.footer-links a:hover{color:var(--gold);}
-.footer-copy{font-size:10px;color:var(--muted);letter-spacing:2px;font-family:'DM Mono',monospace;text-transform:uppercase;}
+        .ebook-card:hover {
+            background: #f0f7f0;
+            box-shadow: 0 4px 12px rgba(27, 94, 32, 0.1);
+        }
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-.reveal{opacity:0;transform:translateY(30px);transition:all .8s ease-out;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+        .ebook-card h3 {
+            font-size: 1.4em;
+            color: #1b5e20;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
 
-/* ── RESPONSIVE ── */
-@media(max-width:992px){
-  .hero-inner{grid-template-columns:1fr;text-align:center;gap:60px;}
-  .hero-subtitle{margin-left:auto;margin-right:auto;}
-  .hero-actions{justify-content:center;}
-  .hero-proof{justify-content:center;}
-  .features-grid{grid-template-columns:1fr 1fr;}
-  .pricing-card{grid-template-columns:1fr;gap:40px;padding:40px 32px;}
-  .pricing-right{border-left:none;border-top:1px solid rgba(196,151,90,.15);padding-left:0;padding-top:40px;}
-}
-@media(max-width:768px){
-  .nav-links{display:none;}
-  .nav-hamburger{display:flex;}
-  .features-grid{grid-template-columns:1fr;}
-  section{padding:64px 5vw;}
-}
-</style>
+        .ebook-card p {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1b5e20;
+            color: white;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .cta-button:hover {
+            background: #2d6a4f;
+            transform: translateX(3px);
+        }
+
+        .footer {
+            border-top: 2px solid #e5e5e5;
+            padding-top: 40px;
+            margin-top: 80px;
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e5e5e5;
+            margin: 50px 0;
+        }
+
+        .ebook-grid {
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .ebook-card {
+                padding: 25px;
+            }
+
+            .ebook-card h3 {
+                font-size: 1.1em;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<nav id="navbar">
-  <a href="#" class="nav-logo">
-    <svg width="32" height="32" viewBox="0 0 90 90" fill="none">
-      <circle cx="45" cy="45" r="42" fill="rgba(196,151,90,0.1)" stroke="#C4975A" stroke-width="1"/>
-      <path d="M 26 72 L 26 46 Q 26 24, 45 24 Q 64 24, 64 46 L 64 72 Z" fill="none" stroke="#C4975A" stroke-width="1.5"/>
-      <line x1="45" y1="65" x2="45" y2="40" stroke="#7A8C6E" stroke-width="1.5"/>
-      <path d="M 45 53 C 39 47, 35 40, 40 35 C 42 33, 45 37, 45 43 Z" fill="#7A8C6E" opacity="0.9"/>
-      <path d="M 45 53 C 51 47, 55 40, 50 35 C 48 33, 45 37, 45 43 Z" fill="#7A8C6E" opacity="0.7"/>
-      <line x1="22" y1="72" x2="68" y2="72" stroke="#C4975A" stroke-width="1.2"/>
-    </svg>
-    <div class="nav-logo-text">Hati<span>Sedar</span></div>
-  </a>
-  <div class="nav-links">
-    <a href="#features">Feature</a>
-    <a href="#demo">Demo</a>
-    <a href="#pricing">Harga</a>
-    <a href="#faq">FAQ</a>
-    <a href="/checkout.html" class="nav-cta">Beli Sekarang →</a>
-  </div>
-  <div class="nav-hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#features" onclick="toggleMenu()">Feature</a>
-  <a href="#demo" onclick="toggleMenu()">Demo</a>
-  <a href="#pricing" onclick="toggleMenu()">Harga</a>
-  <a href="#faq" onclick="toggleMenu()">FAQ</a>
-  <a href="/checkout.html" class="m-cta">Beli Sekarang →</a>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-dots"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-badge">🌿 Jurnal Digital Pertama Dalam BM</div>
-      <h1 class="hero-title">
-        Untuk jiwa yang<br>ingin <em>kembali</em><br>kepada Allah.
-      </h1>
-      <p class="hero-subtitle">
-        Muhasabah Journal — jurnal harian digital dalam <strong>Bahasa Melayu</strong> yang membantu anda mengenal diri, mensyukuri nikmat, dan <strong>sedar akan kehadiran Allah</strong> setiap hari.
-      </p>
-      <div class="hero-actions">
-        <a href="/checkout.html" class="btn-primary">Mula Sekarang — RM14.90 →</a>
-        <a href="#features" class="btn-secondary">Tahu Lebih Lanjut</a>
-      </div>
-      <div class="hero-proof">
-        <div class="hero-proof-dots">
-          <span>S</span><span>A</span><span>N</span><span>R</span>
+    <div class="container">
+        <div class="header">
+            <h1>Ebook Hati Sedar</h1>
+            <p>Koleksi Panduan Kesihatan Jiwa dan Spiritual</p>
         </div>
-        <p><strong>Bergabung bersama jiwa-jiwa yang mencari</strong><br>ketenangan melalui muhasabah harian</p>
-      </div>
+
+        <div class="intro">
+            <p>Pilih panduan yang sesuai dengan perjalanan kesihatan jiwa anda. Setiap ebook dirancang untuk membimbing anda menuju pemulihan, kefahaman diri, dan kedekatan dengan Allah.</p>
+        </div>
+
+        <h2 class="section-title">Pilihan Ebook Kami</h2>
+
+        <div class="ebook-grid">
+            <a href="https://kesihatan-jiwa.netlify.app/" class="ebook-card" target="_blank">
+                <h3>Siapa Saya, Kenapa Saya Sakit, dan Bagaimana Saya Boleh Sembuh?</h3>
+                <p>Panduan komprehensif yang mengungkap jawapan mendalam tentang identiti anda, punca sebenar masalah kesihatan jiwa, dan jalan menuju pemulihan berlandaskan Islam. Pelajari tujuh langkah tazkiyatun-nafs untuk menggilap cermin jiwa anda.</p>
+                <a href="https://kesihatan-jiwa.netlify.app/" class="cta-button" target="_blank">Baca Sekarang →</a>
+            </a>
+
+            <a href="https://ebookjiwaket.netlify.app/" class="ebook-card" target="_blank">
+                <h3>Panduan Mengatasi Ketagihan</h3>
+                <p>Strategi komprehensif dan terbukti berkesan untuk memahami akar ketagihan, memutuskan rantainya, dan memulakan perjalanan pemulihan yang berkelanjutan. Penuh dengan wawasan praktis dan pendekatan holistik.</p>
+                <a href="https://ebookjiwaket.netlify.app/" class="cta-button" target="_blank">Baca Sekarang →</a>
+            </a>
+
+            <a href="https://muraqabahebook.netlify.app/" class="ebook-card" target="_blank">
+                <h3>Muraqabah E-Book</h3>
+                <p>Panduan praktikal tentang muraqabah (meditasi Islam) untuk mencapai ketenangan fikiran, kehadiran spiritual, dan kedekatan dengan Allah SWT. Mulai perjalanan transformasi batin anda hari ini.</p>
+                <a href="https://muraqabahebook.netlify.app/" class="cta-button" target="_blank">Baca Sekarang →</a>
+            </a>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="footer">
+            <p>Semua ebook disediakan dalam format PDF yang mudah diakses. Hubungi kami untuk pertanyaan atau maklum balas.</p>
+        </div>
     </div>
-    <div class="hero-right">
-      <div class="phone-mockup">
-        <div class="phone-float-1"><strong>✓ Tersimpan</strong>Entri hari ini</div>
-        <div class="phone-float-2"><strong>✨ AI Ringkasan</strong>Hujung bulan</div>
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <div class="phone-screen-inner">
-              <div class="ps-nav">
-                <svg width="16" height="16" viewBox="0 0 90 90" fill="none">
-                  <path d="M 26 72 L 26 46 Q 26 24, 45 24 Q 64 24, 64 46 L 64 72 Z" fill="none" stroke="#C4975A" stroke-width="2"/>
-                  <line x1="45" y1="65" y2="40" x2="45" stroke="#7A8C6E" stroke-width="2"/>
-                  <path d="M 45 53 C 39 47, 35 40, 40 35 C 42 33, 45 37, 45 43 Z" fill="#7A8C6E" opacity="0.9"/>
-                  <path d="M 45 53 C 51 47, 55 40, 50 35 C 48 33, 45 37, 45 43 Z" fill="#7A8C6E" opacity="0.7"/>
-                  <line x1="22" y1="72" x2="68" y2="72" stroke="#C4975A" stroke-width="1.5"/>
-                </svg>
-                <span class="ps-nav-brand">Muhasabah</span>
-              </div>
-              <div class="ps-body">
-                <div class="ps-hero-card">
-                  <div class="ps-greeting">Selamat <em>Pagi</em>, Siti</div>
-                  <div class="ps-sub">Jadikan hari ini lebih bermakna</div>
-                  <div class="ps-streak">
-                    <div class="ps-day done">I</div><div class="ps-day done">S</div>
-                    <div class="ps-day done">R</div><div class="ps-day done">K</div>
-                    <div class="ps-day done">J</div><div class="ps-day miss">S</div>
-                    <div class="ps-day miss">A</div>
-                  </div>
-                  <button class="ps-btn">☀️ Mula Muhasabah</button>
-                </div>
-                <div class="ps-stats">
-                  <div class="ps-stat"><div class="ps-stat-n">5</div><div class="ps-stat-l">STREAK</div></div>
-                  <div class="ps-stat"><div class="ps-stat-n">18</div><div class="ps-stat-l">ENTRI</div></div>
-                  <div class="ps-stat"><div class="ps-stat-n">😊</div><div class="ps-stat-l">MOOD</div></div>
-                </div>
-                <div class="ps-card">
-                  <div class="ps-card-tag">RINGKASAN AI</div>
-                  <div class="ps-card-text">Bulan ini hati anda menunjukkan pertumbuhan yang luar biasa...</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="section-header reveal">
-      <span class="section-label">Apa Yang Anda Dapat</span>
-      <h2 class="section-title">Bukan sekadar jurnal biasa.<br>Ini <em>ruang jiwa</em> anda.</h2>
-      <p class="section-sub">Setiap feature direka khas untuk membantu anda menghisab diri dengan cara yang mudah, bermakna, dan islamik.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feat-card reveal">
-        <div class="feat-icon">☀️</div>
-        <div class="feat-title">Muhasabah Harian</div>
-        <p class="feat-desc">Niat pagi, tracker mood dengan emoji, 3 perkara syukur, dan refleksi malam — semua dalam satu halaman yang cantik dan mudah diisi.</p>
-        <span class="feat-tag">PAGI & MALAM</span>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon">📖</div>
-        <div class="feat-title">Sejarah Entri</div>
-        <p class="feat-desc">Semua catatan tersimpan kemas mengikut bulan. Baca balik perjalanan hati anda — tengok betapa jauh anda sudah berkembang.</p>
-        <span class="feat-tag">AUTO TERSIMPAN</span>
-      </div>
-      <div class="feat-card featured reveal">
-        <div class="feat-icon" style="background:rgba(196,151,90,.15)">✨</div>
-        <div class="feat-title">Ringkasan AI Bulanan</div>
-        <p class="feat-desc">Di hujung bulan, AI analisa semua entri anda dan hasilkan ringkasan perjalanan jiwa, corak emosi, kekuatan anda, dan nasihat islamik untuk bulan hadapan.</p>
-        <span class="feat-tag">DIKUASAI AI</span>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon">🏠</div>
-        <div class="feat-title">Dashboard Peribadi</div>
-        <p class="feat-desc">Streak harian, mood purata, jumlah entri — semua dalam satu paparan yang memotivasikan anda untuk terus konsisten.</p>
-        <span class="feat-tag">VISUAL & JELAS</span>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon">📱</div>
-        <div class="feat-title">Buka Terus Di Browser</div>
-        <p class="feat-desc">Tiada download, tiada install. Buka link dalam Chrome atau Safari — terus boleh guna. Sesuai untuk semua telefon Android dan iPhone.</p>
-        <span class="feat-tag">TIADA APP PERLU</span>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon">💾</div>
-        <div class="feat-title">Data Selamat & Peribadi</div>
-        <p class="feat-desc">Setiap pembeli ada password unik. Data jurnal anda tersimpan dalam peranti anda sendiri — privasi terjaga sepenuhnya.</p>
-        <span class="feat-tag">PASSWORD UNIK</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- DEMO SCREENSHOTS -->
-<section class="demo" id="demo">
-  <div class="demo-inner">
-    <div class="section-header reveal">
-      <span class="section-label">Tengok Sendiri</span>
-      <h2 class="section-title">App yang <em>sebenar-benarnya</em><br>untuk jiwa anda.</h2>
-      <p class="section-sub">Klik pada mana-mana gambar untuk lihat lebih dekat. Ini bukan mockup — ini app sebenar yang anda akan guna.</p>
-    </div>
-    <div class="demo-grid">
-      <div class="demo-card reveal" onclick="openLightbox(0)">
-        <img src="https://i.imgur.com/ROcC4mi.jpeg" alt="Home Dashboard" loading="lazy"/>
-        <div class="demo-card-info">
-          <div class="demo-card-num">01 · HOME</div>
-          <div class="demo-card-title">Dashboard Peribadi</div>
-          <p class="demo-card-desc">Streak harian, stats, dan semua feature dalam satu pandangan.</p>
-        </div>
-      </div>
-      <div class="demo-card reveal" onclick="openLightbox(1)">
-        <img src="https://i.imgur.com/sfTbzae.jpeg" alt="Muhasabah Harian" loading="lazy"/>
-        <div class="demo-card-info">
-          <div class="demo-card-num">02 · HARIAN</div>
-          <div class="demo-card-title">Muhasabah Harian</div>
-          <p class="demo-card-desc">Niat pagi, tracker mood, syukur & refleksi malam.</p>
-        </div>
-      </div>
-      <div class="demo-card reveal" onclick="openLightbox(2)">
-        <img src="https://i.imgur.com/fbnWgFO.jpeg" alt="Tracker Emosi" loading="lazy"/>
-        <div class="demo-card-info">
-          <div class="demo-card-num">03 · EMOSI</div>
-          <div class="demo-card-title">Tracker Emosi</div>
-          <p class="demo-card-desc">Kenal punca emosi, ukur intensiti & luah dengan bebas.</p>
-        </div>
-      </div>
-      <div class="demo-card reveal" onclick="openLightbox(3)">
-        <img src="https://i.imgur.com/GuOdYPM.jpeg" alt="Ringkasan AI" loading="lazy"/>
-        <div class="demo-card-info">
-          <div class="demo-card-num">04 · AI</div>
-          <div class="demo-card-title">Ringkasan AI Bulanan</div>
-          <p class="demo-card-desc">AI analisa semua entri & beri nasihat islamik personal.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-prev" onclick="changeLightbox(-1)">‹</button>
-  <img id="lightbox-img" src="" alt=""/>
-  <button class="lightbox-next" onclick="changeLightbox(1)">›</button>
-  <div class="lightbox-counter" id="lightbox-counter">1 / 4</div>
-</div>
-
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="pricing-inner">
-    <div class="section-header reveal">
-      <span class="section-label">Pelaburan Untuk Jiwa</span>
-      <h2 class="section-title">Harga yang <em>berpatutan</em>,<br>nilai yang tak ternilai.</h2>
-    </div>
-    <div class="pricing-card reveal">
-      <div class="pricing-left">
-        <div class="price-tag">AKSES PENUH SEUMUR HIDUP</div>
-        <div class="price-amount"><span>RM</span>14.90</div>
-        <p class="price-note">Bayar sekali. Guna selama-lamanya. Tiada yuran bulanan.</p>
-        <a href="/checkout.html" class="price-cta">Dapatkan Akses Sekarang →</a>
-        <p class="price-sub">✓ Dapat password terus selepas bayar &nbsp;·&nbsp; ✓ Tiada kontrak</p>
-      </div>
-      <div class="pricing-right">
-        <div class="includes-title">APA YANG ANDA DAPAT:</div>
-        <div class="include-item">
-          <div class="include-check">
-            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#7A8C6E" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="include-text"><strong>Muhasabah Harian Tanpa Had</strong>Isi setiap hari — pagi & malam, selama yang anda mahu</div>
-        </div>
-        <div class="include-item">
-          <div class="include-check">
-            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#7A8C6E" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="include-text"><strong>Ringkasan AI Setiap Bulan</strong>Analisa mendalam perjalanan jiwa anda dengan AI</div>
-        </div>
-        <div class="include-item">
-          <div class="include-check">
-            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#7A8C6E" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="include-text"><strong>Sejarah Entri Penuh</strong>Semua catatan tersimpan — tiada had entri</div>
-        </div>
-        <div class="include-item">
-          <div class="include-check">
-            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#7A8C6E" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="include-text"><strong>Password Akses Unik</strong>Privasi terjaga — hanya anda yang boleh akses jurnal anda</div>
-        </div>
-        <div class="include-item">
-          <div class="include-check">
-            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#7A8C6E" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="include-text"><strong>Guna Di Semua Telefon</strong>Android & iPhone — tiada download diperlukan</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="faq-inner">
-    <div class="section-header reveal">
-      <span class="section-label">Soalan Lazim</span>
-      <h2 class="section-title">Ada <em>soalan?</em><br>Kami ada jawapan.</h2>
-    </div>
-    <div id="faqList">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Macam mana nak guna selepas beli?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Selepas bayar, anda akan terima <strong>emel</strong> yang mengandungi link jurnal dan <strong>password</strong> anda secara automatik. Buka link dalam emel tersebut, masukkan emel dan password, terus boleh guna. Tiada download atau install langsung.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Kena ada app khas tak untuk guna?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Tidak perlu langsung! Buka sahaja dalam browser telefon anda — Chrome atau Safari. Boleh juga "Add to Home Screen" supaya nampak macam app sebenar di skrin utama telefon anda.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Data jurnal saya selamat ke?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Ya, selamat. Data jurnal anda disimpan dalam peranti anda sendiri. Kami tidak simpan atau baca kandungan jurnal peribadi anda. Setiap pembeli mempunyai nama pengguna dan password unik masing-masing.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Boleh guna dalam Android dan iPhone?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Ya, boleh! App ini berfungsi dalam mana-mana browser moden — Chrome, Safari, Firefox. Sesuai untuk semua telefon Android dan iPhone tanpa sebarang isu.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Macam mana Ringkasan AI berfungsi?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Di hujung setiap bulan, klik "Jana Ringkasan AI" — sistem akan analisa semua entri jurnal anda untuk bulan tersebut dan hasilkan ringkasan bermakna: corak emosi anda, kekuatan anda, dan nasihat islamik untuk bulan hadapan.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Ada yuran bulanan ke?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Tidak ada! Bayar sekali RM14.90 sahaja dan guna selama-lamanya. Tiada yuran bulanan, tiada kontrak, tiada hidden charges.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BOTTOM -->
-<section class="cta-bottom">
-  <div class="cta-glow"></div>
-  <div class="cta-inner reveal">
-    <span class="section-label" style="color:var(--gold)">Mulai Hari Ini</span>
-    <h2 class="section-title">Jiwa yang <em>sedar</em><br>bermula dengan satu langkah.</h2>
-    <p class="section-sub">Ramai yang merancang untuk mula muhasabah. Tapi yang berjaya hanya mereka yang benar-benar bermula. Hari ini, biarkan ia jadi hari pertama anda.</p>
-    <a href="/checkout.html" class="btn-primary" style="font-size:16px;padding:16px 44px;">Dapatkan Akses — RM14.90 →</a>
-    <p class="cta-quote">
-      "Hisablah dirimu sebelum kamu dihisab."
-      <cite>— Saidina Umar Al-Khattab r.a.</cite>
-    </p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Hati Sedar</div>
-  <div class="footer-links">
-    <a href="#features">Feature</a>
-    <a href="#demo">Demo</a>
-    <a href="#pricing">Harga</a>
-    <a href="#faq">FAQ</a>
-    <a href="https://mymuhasabahjournal.netlify.app/journal.html">Log Masuk</a>
-  </div>
-  <div class="footer-copy">© 2026 Hati Sedar · MURAQABAH · MUHASABAH</div>
-</footer>
-
-<script>
-// NAV scroll effect
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
-});
-
-// Mobile menu
-function toggleMenu(){
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-// FAQ accordion
-function toggleFaq(el){
-  const item = el.parentElement;
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!isOpen) item.classList.add('open');
-}
-
-// Scroll reveal
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-// Lightbox
-const screens = [
-  'https://i.imgur.com/ROcC4mi.jpeg',
-  'https://i.imgur.com/sfTbzae.jpeg',
-  'https://i.imgur.com/fbnWgFO.jpeg',
-  'https://i.imgur.com/GuOdYPM.jpeg'
-];
-let currentScreen = 0;
-function openLightbox(i){
-  currentScreen = i;
-  document.getElementById('lightbox-img').src = screens[i];
-  document.getElementById('lightbox-counter').textContent = (i+1)+' / '+screens.length;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeLightbox(e){
-  if(!e||e.target===document.getElementById('lightbox')||e.currentTarget.classList.contains('lightbox-close')){
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow='';
-  }
-}
-function changeLightbox(dir){
-  currentScreen=(currentScreen+dir+screens.length)%screens.length;
-  document.getElementById('lightbox-img').src=screens[currentScreen];
-  document.getElementById('lightbox-counter').textContent=(currentScreen+1)+' / '+screens.length;
-}
-document.addEventListener('keydown',e=>{
-  if(document.getElementById('lightbox').classList.contains('open')){
-    if(e.key==='Escape') closeLightbox();
-    if(e.key==='ArrowLeft') changeLightbox(-1);
-    if(e.key==='ArrowRight') changeLightbox(1);
-  }
-});
-
-</script>
 </body>
 </html>
