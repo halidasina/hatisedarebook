@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muraqabah: Hadir Sepenuhnya di Hadapan Allah</title>
+    <title>Ebook Hati Sedar</title>
     <style>
         * {
             margin: 0;
@@ -11,657 +11,188 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --maroon: #8b3a2a;
-            --gold: #b8972a;
-            --gold-light: #c9a83c;
-            --jade: #2d5a4e;
-            --jade-dark: #1d3a30;
-            --parch: #f0e8d8;
-            --parch-border: #d4c4a0;
-            --cream: #faf6ef;
-            --text-primary: #2a2622;
-            --text-secondary: #5a5248;
-            --text-muted: #8b7355;
-
-            --primary: #2d5a4e;
-            --secondary: #b8972a;
-            --border: #d4c4a0;
-            --surface: #faf6ef;
-            --surface-light: #f0e8d8;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: var(--surface);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Georgia', 'Garamond', serif;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.8;
         }
 
-        /* Full Width Sections */
-        .section-full {
-            width: 100%;
-            padding: 4rem 2rem;
-            border-bottom: 0.5px solid var(--border);
-        }
-
-        .section-full.hero {
-            background: linear-gradient(135deg, rgba(45, 92, 82, 0.08) 0%, transparent 100%);
-            padding: 5rem 2rem 4rem;
-            text-align: center;
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section-full.hero::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(45, 92, 82, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            top: -100px;
-            right: -100px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(20px); }
-        }
-
-        .section-content {
-            max-width: 1200px;
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            width: 100%;
+            padding: 60px 30px;
         }
 
-        /* Hero Content */
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            border-bottom: 2px solid #e5e5e5;
+            padding-bottom: 40px;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
 
-        .hero-content h1 {
-            font-size: 48px;
-            font-weight: 500;
-            margin-bottom: 1.2rem;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
+        .header p {
+            font-size: 1.1em;
+            color: #666;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .intro {
+            margin-bottom: 60px;
+            font-size: 1.05em;
+            line-height: 1.9;
+        }
+
+        .intro strong {
+            color: #1b5e20;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin: 60px 0 40px 0;
+            color: #1b5e20;
+            letter-spacing: 0.5px;
+        }
+
+        .ebook-card {
+            background: #f9f9f9;
+            border-left: 4px solid #1b5e20;
+            padding: 35px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .ebook-card:hover {
+            background: #f0f7f0;
+            box-shadow: 0 4px 12px rgba(27, 94, 32, 0.1);
+        }
+
+        .ebook-card h3 {
+            font-size: 1.4em;
+            color: #1b5e20;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .ebook-card p {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1b5e20;
+            color: white;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .cta-button:hover {
+            background: #2d6a4f;
+            transform: translateX(3px);
+        }
+
+        .footer {
+            border-top: 2px solid #e5e5e5;
+            padding-top: 40px;
+            margin-top: 80px;
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         .divider {
-            width: 40px;
             height: 1px;
-            background: var(--border);
-            margin: 2rem auto;
+            background: #e5e5e5;
+            margin: 50px 0;
         }
 
-        .hero-content p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 2.5rem;
+        .ebook-grid {
+            margin-bottom: 40px;
         }
 
-        /* Section Title */
-        .section-title {
-            font-size: 28px;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-            text-align: center;
-            letter-spacing: -0.3px;
-        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
 
-        /* Column Grid */
-        .column-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .column-grid.two-col {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .column-grid.three-col {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        /* Pain Point Card */
-        .pain-card {
-            padding: 1.8rem;
-            background: white;
-            border: none;
-            border-left: 3px solid var(--secondary);
-            border-right: 1px solid var(--parch-border);
-            border-radius: 0 12px 12px 0;
-            box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pain-card:hover {
-            box-shadow: 0 8px 20px rgba(184, 151, 42, 0.15);
-            transform: translateY(-4px);
-        }
-
-        .pain-card::before {
-            content: '– ';
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 18px;
-            margin-right: 10px;
-        }
-
-        .pain-card p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Reassurance Box */
-        .reassurance-box {
-            background: white;
-            padding: 2.5rem;
-            border: none;
-            border-left: 3px solid var(--secondary);
-            border-right: 1px solid var(--parch-border);
-            border-radius: 0 12px 12px 0;
-            box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
-            text-align: center;
-            transition: all 0.4s ease;
-            margin: 2rem 0;
-        }
-
-        .reassurance-box:hover {
-            box-shadow: 0 8px 20px rgba(184, 151, 42, 0.15);
-        }
-
-        .reassurance-box p {
-            font-size: 16px;
-            color: var(--text-primary);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .reassurance-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Learn Card */
-        .learn-card {
-            padding: 1.8rem;
-            background: white;
-            border: none;
-            border-left: 3px solid var(--secondary);
-            border-right: 1px solid var(--parch-border);
-            border-radius: 0 12px 12px 0;
-            box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .learn-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .learn-card:hover {
-            padding-left: 2rem;
-            color: var(--text-primary);
-        }
-
-        .learn-card::before {
-            content: '■ ';
-            color: var(--primary);
-            font-size: 8px;
-            margin-right: 10px;
-        }
-
-        .learn-card p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Feature Box */
-        .feature-box {
-            padding: 1.8rem;
-            background: white;
-            border: none;
-            border-left: 3px solid var(--secondary);
-            border-right: 1px solid var(--parch-border);
-            border-radius: 0 12px 12px 0;
-            box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(184, 151, 42, 0.02) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .feature-box:hover {
-            box-shadow: 0 8px 24px rgba(184, 151, 42, 0.15);
-            transform: translateY(-8px);
-        }
-
-        .feature-box:hover::before {
-            opacity: 1;
-        }
-
-        .feature-label {
-            font-size: 12px;
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.8rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .feature-text {
-            font-size: 16px;
-            color: var(--text-primary);
-            font-weight: 500;
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Imagine Section */
-        .imagine-section {
-            background: white;
-            padding: 2.5rem;
-            border: none;
-            border-left: 3px solid var(--secondary);
-            border-right: 1px solid var(--parch-border);
-            border-radius: 0 12px 12px 0;
-            box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .imagine-section:hover {
-            box-shadow: 0 8px 20px rgba(184, 151, 42, 0.15);
-        }
-
-        .imagine-intro {
-            font-size: 12px;
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-        }
-
-        .imagine-text {
-            font-size: 17px;
-            color: var(--text-primary);
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
-        }
-
-        .imagine-text:last-child {
-            margin-bottom: 0;
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: white;
-            padding: 3rem 2rem;
-            border: none;
-            border-left: 3px solid var(--secondary);
-            border-right: 1px solid var(--parch-border);
-            border-radius: 0 12px 12px 0;
-            box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .cta-section:hover {
-            box-shadow: 0 8px 24px rgba(184, 151, 42, 0.15);
-        }
-
-        .cta-title {
-            font-size: 26px;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.3px;
-        }
-
-        .price-display {
-            margin: 2rem 0;
-        }
-
-        .price {
-            font-size: 56px;
-            font-weight: 400;
-            color: var(--text-primary);
-        }
-
-        .currency {
-            font-size: 20px;
-            color: var(--text-secondary);
-        }
-
-        .price-desc {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin: 1rem 0 2rem;
-        }
-
-        .btn-cta {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 16px 48px;
-            border-radius: 0;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            max-width: 400px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-cta:hover {
-            background: #1f4237;
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(45, 92, 82, 0.3);
-        }
-
-        .btn-cta:active {
-            transform: scale(0.98);
-        }
-
-        .value-list {
-            list-style: none;
-            margin: 2rem 0;
-            font-size: 15px;
-            color: var(--text-secondary);
-            text-align: left;
-            display: inline-block;
-        }
-
-        .value-list li {
-            padding: 0.6rem 0;
-            line-height: 1.7;
-        }
-
-        .value-list li::before {
-            content: '•';
-            margin-right: 12px;
-            color: var(--primary);
-            font-weight: 800;
-        }
-
-        .footer-text {
-            padding: 2rem 0;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .fade-in-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 32px;
+            .header h1 {
+                font-size: 2em;
             }
 
             .section-title {
-                font-size: 22px;
+                font-size: 1.4em;
             }
 
-            .column-grid,
-            .column-grid.two-col,
-            .column-grid.three-col {
-                grid-template-columns: 1fr;
+            .ebook-card {
+                padding: 25px;
             }
 
-            .price {
-                font-size: 40px;
+            .ebook-card h3 {
+                font-size: 1.1em;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="section-full hero">
-        <div class="section-content">
-            <div class="hero-content">
-                <h1>Badan Di Sini.<br>Fikiran Entah Ke Mana.</h1>
-                <div class="divider"></div>
-                <p>Anda pernah mengalaminya?</p>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h1>Ebook Hati Sedar</h1>
+            <p>Koleksi Panduan Kesihatan Jiwa dan Spiritual</p>
         </div>
-    </section>
 
-    <!-- Pain Points Section -->
-    <section class="section-full fade-in-on-scroll">
-        <div class="section-content">
-            <div class="column-grid">
-                <div class="pain-card">Berdiri dalam solat, namun fikiran sibuk dengan seribu perkara lain</div>
-                <div class="pain-card">Merasa bersalah kerana hati sukar hadir ketika menghadap Allah</div>
-                <div class="pain-card">Hari-hari dipenuhi dengan gangguan, sehingga hati terasa jauh</div>
-            </div>
+        <div class="intro">
+            <p>Pilih panduan yang sesuai dengan perjalanan kesihatan jiwa anda. Setiap ebook dirancang untuk membimbing anda menuju pemulihan, kefahaman diri, dan kedekatan dengan Allah.</p>
         </div>
-    </section>
 
-    <!-- Reassurance Section -->
-    <section class="section-full fade-in-on-scroll">
-        <div class="section-content">
-            <div class="reassurance-box">
-                <p>Anda tidak keseorangan dalam pengalaman ini.</p>
-                <p>Ada sebab mendalam kenapa hati menjadi sukar tenang — dan ada jalan untuk melatihnya kembali.</p>
-            </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="https://toyyibpay.com/muraqabahebook" class="btn-cta">Dapatkan Ebook Sekarang - RM12.90</a>
-            </div>
+        <h2 class="section-title">Pilihan Ebook Kami</h2>
+
+        <div class="ebook-grid">
+            <a href="https://kesihatan-jiwa.netlify.app/" class="ebook-card" target="_blank">
+                <h3>Siapa Saya, Kenapa Saya Sakit, dan Bagaimana Saya Boleh Sembuh?</h3>
+                <p>Panduan komprehensif yang mengungkap jawapan mendalam tentang identiti anda, punca sebenar masalah kesihatan jiwa, dan jalan menuju pemulihan berlandaskan Islam. Pelajari tujuh langkah tazkiyatun-nafs untuk menggilap cermin jiwa anda.</p>
+                <a href="https://kesihatan-jiwa.netlify.app/" class="cta-button" target="_blank">Baca Sekarang →</a>
+            </a>
+
+            <a href="https://ebookjiwaket.netlify.app/" class="ebook-card" target="_blank">
+                <h3>Panduan Mengatasi Ketagihan</h3>
+                <p>Strategi komprehensif dan terbukti berkesan untuk memahami akar ketagihan, memutuskan rantainya, dan memulakan perjalanan pemulihan yang berkelanjutan. Penuh dengan wawasan praktis dan pendekatan holistik.</p>
+                <a href="https://ebookjiwaket.netlify.app/" class="cta-button" target="_blank">Baca Sekarang →</a>
+            </a>
+
+            <a href="https://muraqabahebook.netlify.app/" class="ebook-card" target="_blank">
+                <h3>Muraqabah E-Book</h3>
+                <p>Panduan praktikal tentang muraqabah (meditasi Islam) untuk mencapai ketenangan fikiran, kehadiran spiritual, dan kedekatan dengan Allah SWT. Mulai perjalanan transformasi batin anda hari ini.</p>
+                <a href="https://muraqabahebook.netlify.app/" class="cta-button" target="_blank">Baca Sekarang →</a>
+            </a>
         </div>
-    </section>
 
-    <!-- Title Section -->
-    <section class="section-full fade-in-on-scroll">
-        <div class="section-content">
-            <div style="text-align: center;">
-                <h2 class="section-title">Muraqabah: Hadir Sepenuhnya di Hadapan Allah</h2>
-                <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.7;">Panduan Islam & Psikologi untuk Mengembalikan Hati kepada Kesedaran, Ketenangan, dan Jarak yang Dekat dengan-Nya</p>
-            </div>
-        </div>
-    </section>
+        <div class="divider"></div>
 
-    <!-- Realiti Section -->
-    <section class="section-full fade-in-on-scroll">
-        <div class="section-content">
-            <h3 class="section-title">Realiti Zaman Kita</h3>
-            <div class="column-grid">
-                <div>
-                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">Kita hidup dalam zaman yang sentiasa menuntut perhatian. Setiap detik, ada sesuatu yang meminta kesedaran kita.</p>
-                </div>
-                <div>
-                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">Telefon berbunyi. Media sosial tidak berhenti. Fikiran terbelah antara masa lalu, masa depan, pekerjaan, keluarga.</p>
-                </div>
-                <div>
-                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">Lalu, ketika berdiri menghadap Allah — badan berada di hadapan-Nya, tetapi hati masih terikat dengan dunia.</p>
-                </div>
-            </div>
-            <div class="divider" style="margin: 2rem auto;"></div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <p style="font-size: 17px; color: var(--text-primary); font-weight: 500;">Pertanyaan yang dimulai dari ebook ini: Bagaimana cara kita belajar untuk benar-benar hadir di hadapan Allah?</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Learn Section -->
-    <section class="section-full fade-in-on-scroll">
-        <div class="section-content">
-            <h3 class="section-title">Apa Yang Akan Anda Pelajari</h3>
-            <div class="column-grid two-col">
-                <div>
-                    <div class="learn-card"><p>Mengapa fikiran sentiasa melayang — perspektif Imam Al-Ghazali dan psikologi moden</p></div>
-                    <div class="learn-card"><p>Esensi muraqabah — hidup dengan kesedaran bahawa Allah sentiasa melihat dan mendengar kita</p></div>
-                </div>
-                <div>
-                    <div class="learn-card"><p>Mengubah solat dari sekadar gerakan ritualistik kepada hubungan yang hidup antara hamba dan Tuhannya</p></div>
-                    <div class="learn-card"><p>Kekuatan zikir dan fikir sebagai latihan untuk menghadirkan hati secara mendalam</p></div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">Program praktis 7 hari untuk memulai perjalanan kesedaran muraqabah</p>
-                <a href="https://toyyibpay.com/muraqabahebook" class="btn-cta">Beli Sekarang - RM12.90</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Practice Section -->
-    <section class="section-full fade-in-on-scroll">
-        <div class="section-content">
-            <h3 class="section-title">Lebih Daripada Sekadar Membaca</h3>
-            <p style="text-align: center; font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">Ebook ini bukan untuk menambah koleksi ilmu yang disimpan di rak. Ia dirancang sebagai panduan praktis untuk diamalkan setiap hari.</p>
-            <div class="column-grid three-col">
-                <div class="feature-box">
-                    <div class="feature-label">Sebelum Tidur</div>
-                    <div class="feature-text">Muhasabah mendalam untuk perenungan</div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-label">Sebelum Solat</div>
-                    <div class="feature-text">Latihan mempersiapkan hati untuk hadir</div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-label">Saat Melayang</div>
-                    <div class="feature-text">Teknik untuk kembali kepada zikir</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Imagine Section -->
-    <section class="section-full fade-in-on-scroll">
-        <div class="section-content">
-            <div class="imagine-section">
-                <div class="imagine-intro">Bayangkan Sekiranya</div>
-                <div class="imagine-text">Anda tidak lagi memandang solat sebagai sesuatu yang perlu "diselesaikan" dalam daftar tugas harian.</div>
-                <div class="imagine-text">Sebaliknya, ia menjadi waktu paling berharga dalam sehari — momen seorang hamba berhenti daripada dunia dan benar-benar menghadap Allah dengan sepenuh kesedaran.</div>
-                <div class="imagine-text">Kerana sesungguhnya, solat bukan sekadar bacaan dan pergerakan. Ia adalah pertemuan antara hamba dan Tuhannya.</div>
-                <div style="margin-top: 2rem; text-align: center;">
-                    <a href="https://toyyibpay.com/muraqabahebook" class="btn-cta">Mulai Transformasi Spiritual - RM12.90</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section-full fade-in-on-scroll">
-        <div class="section-content">
-            <div class="cta-section">
-                <h3 class="cta-title">Mulakan Perjalanan Kembali kepada Hati yang Hidup</h3>
-                <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 2rem;">Muraqabah: Hadir Sepenuhnya di Hadapan Allah</p>
-                <div class="price-display">
-                    <div class="price"><span class="currency">RM</span>12.90</div>
-                    <div class="price-desc">Bayaran sekali • Akses seumur hidup</div>
-                </div>
-                <ul class="value-list">
-                    <li>46 halaman panduan Islam & psikologi</li>
-                    <li>Latihan praktis dan refleksi mendalam</li>
-                    <li>Untuk sesiapa yang ingin mendekatkan hati dengan Allah</li>
-                </ul>
-                <a href="https://toyyibpay.com/muraqabahebook" class="btn-cta">Mulai Perjalanan Anda Hari Ini</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-content">
-        <div class="footer-text">
-            Ada pertanyaan? Hubungi kami di molifemarketing@gmail.com
+        <div class="footer">
+            <p>Semua ebook disediakan dalam format PDF yang mudah diakses. Hubungi kami untuk pertanyaan atau maklum balas.</p>
         </div>
     </div>
-
-    <script>
-        // Parallax effect on mouse move
-        document.addEventListener('mousemove', (e) => {
-            const elements = document.querySelectorAll('.feature-box');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-
-            elements.forEach(el => {
-                const x = (mouseX - 0.5) * 5;
-                const y = (mouseY - 0.5) * 5;
-                el.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
-
-        // Scroll animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
