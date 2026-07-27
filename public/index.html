@@ -86,11 +86,12 @@
             background: #2a2a2a;
             border-left: 4px solid #4caf50;
             padding: 35px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             transition: all 0.3s ease;
             text-decoration: none;
             color: #e0e0e0;
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
 
         .ebook-card:hover {
@@ -108,8 +109,9 @@
         .ebook-card p {
             color: #bbb;
             font-size: 0.95em;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             line-height: 1.7;
+            flex-grow: 1;
         }
 
         .cta-button {
@@ -124,7 +126,8 @@
             border: none;
             cursor: pointer;
             font-family: 'Segoe UI', sans-serif;
-            margin-top: 15px;
+            margin-top: auto;
+            width: fit-content;
         }
 
         .cta-button:hover {
